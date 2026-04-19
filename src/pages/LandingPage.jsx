@@ -101,8 +101,16 @@ export default function LandingPageCataguases() {
     }
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await fetch('https://n8n.leadapp.com.br/webhook/pedido-cataguases', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+    } catch (e) {
+      console.error('Erro ao enviar pedido:', e);
+    }
     setIsSuccess(true);
   };
 
